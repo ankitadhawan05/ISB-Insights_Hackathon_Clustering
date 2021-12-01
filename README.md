@@ -1,19 +1,12 @@
 # ISB-Insights_Hackathon
 
 #This project was a part of ISB@Insights Hackathon 2021 whose problem statement was to create a 
-#multi-dimensional poverty and deprivation Index based on the Mission Antayodya Survey 2019
-#(a household survey done to examine the state of infrastructure facilities in terms of access to 
-#healthcare, education, banking and infrastructure facilities)
+#multi-dimensional poverty and deprivation Index based on the Mission Antayodya Survey 2019 (a household survey done to examine the state of infrastructure #facilities in terms of access to healthcare, education, banking and infrastructure facilities)
 
-# The dataset was divided into 4 parts to create sub-indices on education, banking, healthcare and infra
-# The following code is the backend work done to cluster rural districts of India for education and 
-#healthcare. K-Means clustering was used to cluster the districts. 
-#Similar variables were dropped to remove the multi-collinearity
-# and transformations on the raw data set was done before performing clustering.
+The dataset was divided into 4 parts to create sub-indices on education, banking, healthcare and infra
+The following code is the backend work done to cluster rural districts of India for education and healthcare. K-Means clustering was used to cluster the districts. Similar variables were dropped to remove the multi-collinearit and transformations on the raw data set was done before performing clustering.
 
-#For data transformation- based on literature scans, a threshold value of 30% was chosen 
-#to define deprivation i.e. the districts that had less than 30% of facilities were considered deprived 
-#and assigned a value of 1. rest of the values were assigned values of 0.
+For data transformation- based on literature scans, a threshold value of 30% was chosen to define deprivation i.e. the districts that had less than 30% of facilities were considered deprived and assigned a value of 1. rest of the values were assigned values of 0.
 
 import numpy as np
 import pandas as pd
@@ -60,8 +53,9 @@ plt.title('Explained Variance')
 
 plt.show()
 
-## Select Number of PCA compnents based on the above graph for both deprivation data and raw dataset
-# Deprivation dataset was chosen since the transformed dataset defined the scope of the study
+Select Number of PCA compnents based on the above graph for both deprivation data and raw dataset
+Deprivation dataset was chosen since the transformed dataset defined the scope of the study
+
 pca_dep = PCA(n_components = 3).fit(X_dep).transform(X_dep)
 pca_perc = PCA(n_components = 4).fit(X).transform(X)
 
@@ -102,9 +96,8 @@ eduinfra_df.head()
 
 sns.lmplot(x='high_school',y='outdoor_sports',data=eduinfra_df,hue='labels',fit_reg=False)
 
-## The same code and steps can be used to cluster districts in access to healthcare.
+## The same code and steps can be used to cluster districts in access to healthcare.For Healthcare similar varibales were dropped before performing K-Means clustering
 
-## For Healthcare similar varibales were dropped before performing K-Means clustering
 !ls ../input/isb-hackathon-dataset/Hackathon_health.xlsx
 
 df_health=pd.read_excel(r'../input/isb-hackathon-dataset/Hackathon_health.xlsx',sheet_name='%data')
